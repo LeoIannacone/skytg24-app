@@ -27,31 +27,33 @@ class SkyTg():
     
     def show(self):
         self.win.connect("destroy", lambda w: gtk.main_quit())
-        self.win.connect("configure-event", self.resize)
+        self.win.connect("configure-event", self.do_configure_event)
         self.win.show_all() 
         gtk.main()
     
     def clean_page(self, *args):
         clean_js = """
-        ID="%s"
-        player = $(ID)
+        player=$("%(id)s")
         $('body').html('')
         $(player).appendTo('body');
-        """ % self.player_id
+        """ %  {'id': self.player_id, 'width': self.width, 'height': self.height}
         self.view.execute_script(clean_js)
+        self.resize()
     
-    def resize(self, win, event):
+    def do_configure_event(self, win, event):
         if (self.width, self.height) != (event.width, event.height):
-            resize_js = """
-            ID="%(id)s"
-            player = $(ID)
-            player.width(%(width)s)
-            player.height(%(height)s)
-            """ % {'id': self.player_id, 'width': event.width, 'height': event.height}
-            self.view.execute_script(resize_js)
             self.width = event.width
             self.height = event.height
+            self.resize()
         gtk.Window.do_configure_event(self.win, event)
+     
+    def resize(self):
+        resize_js = """
+        player = $("%(id)s")
+        player.width(%(width)s)
+        player.height(%(height)s)
+        """ % {'id': self.player_id, 'width': self.width, 'height': self.height}
+        self.view.execute_script(resize_js)
 
 if __name__ == '__main__':
     tg = SkyTg(URL)
