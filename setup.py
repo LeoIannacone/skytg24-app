@@ -19,7 +19,7 @@ def create_desktop():
 create_desktop()
 
 setup(
-    name = "skytg24",
+    name = "Sky TG24 App",
     version = "0.0.1",
     author = "Leo Iannacone",
     author_email = "l3on@ubuntu.com",
