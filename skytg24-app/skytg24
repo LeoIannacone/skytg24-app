@@ -35,7 +35,7 @@ class SkyTg():
         clean_js = """
         ID="%s"
         player = $(ID)
-        $('body > :not(' + ID + ')').remove();
+        $('body').html('')
         $(player).appendTo('body');
         """ % self.player_id
         self.view.execute_script(clean_js)
