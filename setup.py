@@ -27,7 +27,6 @@ setup(
     license = "GPLv3",
     keywords = "sky tg informazione",
     url = "https://github.com/LeoIannacone/skytg24-app",
-    packages=['skytg24-app',],
     long_description=read('README'),
     
     scripts = ['skytg24-app/skytg24'],
