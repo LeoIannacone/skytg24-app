@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Sky TG24
+GenericName=Il TG di Sky 24 ore su 24
+Comment=Vedi SktTG24
+Exec=@PREFIX@/bin/skytg24
+Icon=skytg24-48.png
+Terminal=false
+Type=Application
+Categories=AudioVideo;
