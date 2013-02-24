@@ -10,14 +10,14 @@ JS_DEBUG=False
 class SkyTg():
 
     player_id="#swfPlayerVideo"
-    min_width=520
-    min_height=324
+    width=520
+    height=324
     
     def __init__(self, url):
         self.url = url
         self.win = gtk.Window()
         self.win.set_title("Sky TG24")
-        self.win.set_size_request(self.min_width, self.min_height)
+        self.win.set_size_request(self.width, self.height)
         self.view = webkit.WebView()
         self.win.add(self.view) 
         if not JS_DEBUG:
@@ -41,13 +41,16 @@ class SkyTg():
         self.view.execute_script(clean_js)
     
     def resize(self, win, event):
-        resize_js = """
-        ID="%(id)s"
-        player = $(ID)
-        player.width(%(width)s)
-        player.height(%(height)s)
-        """ % {'id': self.player_id, 'width': event.width, 'height': event.height}
-        self.view.execute_script(resize_js)
+        if (self.width, self.height) != (event.width, event.height):
+            resize_js = """
+            ID="%(id)s"
+            player = $(ID)
+            player.width(%(width)s)
+            player.height(%(height)s)
+            """ % {'id': self.player_id, 'width': event.width, 'height': event.height}
+            self.view.execute_script(resize_js)
+            self.width = event.width
+            self.height = event.height
         gtk.Window.do_configure_event(self.win, event)
 
 if __name__ == '__main__':
