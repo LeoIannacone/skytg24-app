@@ -1,0 +1,55 @@
+#!/usr/bin/python
+
+import webkit
+import gtk
+
+URL="http://tg24.sky.it/tg24/diretta.html"
+
+JS_DEBUG=False
+
+class SkyTg():
+
+    player_id="#swfPlayerVideo"
+    min_width=520
+    min_height=324
+    
+    def __init__(self, url):
+        self.url = url
+        self.win = gtk.Window()
+        self.win.set_title("Sky TG24")
+        self.win.set_size_request(self.min_width, self.min_height)
+        self.view = webkit.WebView()
+        self.win.add(self.view) 
+        if not JS_DEBUG:
+            self.view.connect('console-message', lambda *arg : True)
+        self.view.connect('document-load-finished', self.clean_page)
+        self.view.load_uri(self.url)
+    
+    def show(self):
+        self.win.connect("destroy", lambda w: gtk.main_quit())
+        self.win.connect("configure-event", self.resize)
+        self.win.show_all() 
+        gtk.main()
+    
+    def clean_page(self, *args):
+        clean_js = """
+        ID="%s"
+        player = $(ID)
+        $('body > :not(' + ID + ')').remove();
+        $(player).appendTo('body');
+        """ % self.player_id
+        self.view.execute_script(clean_js)
+    
+    def resize(self, win, event):
+        resize_js = """
+        ID="%(id)s"
+        player = $(ID)
+        player.width(%(width)s)
+        player.height(%(height)s)
+        """ % {'id': self.player_id, 'width': event.width, 'height': event.height}
+        self.view.execute_script(resize_js)
+        gtk.Window.do_configure_event(self.win, event)
+
+if __name__ == '__main__':
+    tg = SkyTg(URL)
+    tg.show()

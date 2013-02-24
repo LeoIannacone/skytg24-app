@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Sky TG24
+GenericName=Il TG di Sky 24 ore su 24
+Comment=Vedi SktTG24
+Exec=/home/l3on/.local/bin/skytg24
+Icon=/home/l3on/.local/share/icons/sky_tg24-48.png
+Terminal=false
+Type=Application
+Categories=Media;
