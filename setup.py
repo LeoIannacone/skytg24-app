@@ -27,12 +27,12 @@ setup(
     license = "GPLv3",
     keywords = "sky tg informazione",
     url = "https://github.com/LeoIannacone/skytg24-app",
-    long_description=read('README'),
+    long_description=read('README.md'),
     
     scripts = ['skytg24-app/skytg24'],
     
     data_files=[
-        ('share/skytg24-app', ['README', ]), # 'Changelog', 'Authors']),
+        ('share/skytg24-app', ['README.md', ]), # 'Changelog', 'Authors']),
         ('share/applications', ['data/skytg24.desktop']),
         ('share/icons', ['data/skytg24-48.png']),
         ('share/man/man1', ['man/skytg24.1']),
