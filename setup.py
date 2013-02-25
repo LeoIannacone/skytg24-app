@@ -34,7 +34,7 @@ setup(
     data_files=[
         ('share/skytg24-app', ['README.md', ]), # 'Changelog', 'Authors']),
         ('share/applications', ['data/skytg24.desktop']),
-        ('share/icons', ['data/skytg24-48.png']),
+        ('share/icons', ['data/skytg24-256.png']),
         ('share/man/man1', ['man/skytg24.1']),
     ],
 )
