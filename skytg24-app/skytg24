@@ -9,7 +9,7 @@ JS_DEBUG=False
 
 class SkyTg():
 
-    player_id="#swfPlayerVideo"
+    player_id=".vSkyIframe"
     width=520
     height=324
     
@@ -33,10 +33,12 @@ class SkyTg():
     
     def clean_page(self, *args):
         clean_js = """
-        player=$("%(id)s")
-        $('body').html('')
-        $(player).appendTo('body');
-        """ %  {'id': self.player_id, 'width': self.width, 'height': self.height}
+        $($('div')[0]).hide();
+        $($("table")[0]).hide();
+        $($("table")[1]).css('margin-top',0);
+        $($($("table")[1]).find("td")[1]).hide();
+        $($($("table")[1]).find("td")[2]).hide();
+        """
         self.view.execute_script(clean_js)
         self.resize()
     
