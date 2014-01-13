@@ -10,8 +10,8 @@ JS_DEBUG=False
 class SkyTg():
 
     player_id=".vSkyIframe"
-    width=520
-    height=324
+    width=530
+    height=321
     
     def __init__(self, url):
         self.url = url
