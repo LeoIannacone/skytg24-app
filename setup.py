@@ -20,7 +20,7 @@ create_desktop()
 
 setup(
     name = "Sky TG24 App",
-    version = "0.0.1",
+    version = "0.22",
     author = "Leo Iannacone",
     author_email = "l3on@ubuntu.com",
     description = ("Un semplice client per Sky TG24"),
