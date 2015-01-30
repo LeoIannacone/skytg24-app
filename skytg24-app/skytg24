@@ -3,34 +3,35 @@
 import webkit
 import gtk
 
-URL="http://tg24.sky.it/tg24/diretta.html"
+URL = "http://tg24.sky.it/tg24/diretta.html"
 
-JS_DEBUG=False
+JS_DEBUG = False
+
 
 class SkyTg():
 
-    player_id=".vSkyIframe"
-    width=530
-    height=321
-    
+    player_id = ".vSkyIframe"
+    width = 530
+    height = 321
+
     def __init__(self, url):
         self.url = url
         self.win = gtk.Window()
         self.win.set_title("Sky TG24")
         self.win.set_size_request(self.width, self.height)
         self.view = webkit.WebView()
-        self.win.add(self.view) 
+        self.win.add(self.view)
         if not JS_DEBUG:
-            self.view.connect('console-message', lambda *arg : True)
+            self.view.connect('console-message', lambda *arg: True)
         self.view.connect('document-load-finished', self.clean_page)
         self.view.load_uri(self.url)
-    
+
     def show(self):
         self.win.connect("destroy", lambda w: gtk.main_quit())
         self.win.connect("configure-event", self.do_configure_event)
-        self.win.show_all() 
+        self.win.show_all()
         gtk.main()
-    
+
     def clean_page(self, *args):
         clean_js = """
         $($('div')[0]).hide();
@@ -41,14 +42,14 @@ class SkyTg():
         """
         self.view.execute_script(clean_js)
         self.resize()
-    
+
     def do_configure_event(self, win, event):
         if (self.width, self.height) != (event.width, event.height):
             self.width = event.width
             self.height = event.height
             self.resize()
         gtk.Window.do_configure_event(self.win, event)
-     
+
     def resize(self):
         resize_js = """
         player = $("%(id)s")
