@@ -34,7 +34,7 @@ class SkyTg():
 
     def clean_page(self, *args):
         clean_js = """
-        $($('div')[0]).hide();
+        $($('.frame > div')[0]).hide();
         $($("table")[0]).hide();
         $($("table")[1]).css('margin-top',0);
         $($($("table")[1]).find("td")[1]).hide();
