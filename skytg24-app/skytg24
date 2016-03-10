@@ -36,6 +36,7 @@ class SkyTg():
         clean_js = """
         $($('.frame > div')[0]).hide();
         $($("table")[0]).hide();
+        $("body").css('margin',0);
         $($("table")[1]).css('margin-top',0);
         $($($("table")[1]).find("td")[1]).hide();
         $($($("table")[1]).find("td")[2]).hide();
@@ -55,7 +56,11 @@ class SkyTg():
         player = $("%(id)s")
         player.width(%(width)s)
         player.height(%(height)s)
-        """ % {'id': self.player_id, 'width': self.width, 'height': self.height}
+        """ % {
+            'id': self.player_id,
+            'width': self.width,
+            'height': self.height
+        }
         self.view.execute_script(resize_js)
 
 if __name__ == '__main__':
